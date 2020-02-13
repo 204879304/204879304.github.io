@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>诸嘉钰，情人节快乐！</title>
+
+    <style>
+        canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+    </style>
+
+    <link rel="stylesheet" href="css/style.css">
+
+</head>
+
+<body>
+
+<p>
+    <label>
+        <input type="checkbox" id="cb"/>
+        显示填充
+    </label>
+</p>
+
+<svg id="theSvg" viewBox="-120 -30 240 180" enable-background="new 0 0 174 148" xml:space="preserve">
+	<defs>
+		<filter id="f" filterUnits="userSpaceOnUse" id="shadow" x="-120" y="-30" width="120%" height="120%">
+		  <feGaussianBlur in="SourceAlpha" stdDeviation="5" result="blur"></feGaussianBlur>
+            <feOffset in="blur" dx="3" dy="5" result="shadow"></feOffset>
+            <feFlood flood-color="rgba(3,0,0,.9)" result="color"/>
+            <feComposite in="color" in2="shadow" operator="in"/>
+            <feComposite in="SourceGraphic"/>
+		</filter>
+
+        <path id="shape" d="M0, 21.054
+		C0, 21.054 24.618, -15.165 60.750, 8.554 
+		C93.249, 29.888 57.749, 96.888 0, 117.388
+		C-57.749, 96.888  -93.249, 29.888 -60.750, 8.554
+		C-24.618, -15.165  -0, 21.054 -0, 21.054z"/>
+
+        <path id="partialPath"/>
+  
+	</defs>
+
+    <text dy="-2" filter="url(#f)">
+		<textPath xlink:href="#partialPath" stroke="none" font-size="7" fill="red" startOffset="12">一种缘，让你我相逢； 一种情，让你我相恋； 一种相思，让你我爱意缠绵； 一种眷恋，让我爱你此生不变。诸嘉钰，情人节快乐！</textPath>
+	</text>
+
+    <use id="useThePath" xlink:href="#partialPath" stroke="red" stroke-width=".5" stroke-opacity=".5" fill="red"
+         style="display:none;"/>
+ 
+</svg>
+
+<canvas id=c></canvas>
+
+<script src="js/index.js"></script>
+
+<script>
+    let w = c.width = window.innerWidth,
+        h = c.height = window.innerHeight,
+        ctx = c.getContext('2d'),
+
+        opts = {
+            phrases: ["有些路很远，走下去会很累。\n可是，不走，会后悔。", "最美的不是夕阳，\n而是夕阳下同你一起走过的时光。",
+                "人生最大的幸福，\n是发现自己爱的人正好也爱自己。", "说不上你哪里好，\n但，当我女朋友刚刚好。",
+                "乍见欢喜，小别心思，久处仍怦然。", "最美的年华，不论年龄，不论经历，\n有你，足矣。",
+                "真的真的真的好爱你。", "一想到能和你共度余生，\n我就对余生充满了期待。", "你的名字，\n是我见过最短的情诗。",
+                "一日，两人，三餐，四季。", "你就是最好的，如果真的有比你更好的人，我就假装没看见。", "盛意以山河，山河不及你。",
+                "你是可爱的女孩，我是可爱。", "择一城终老，\n遇一人白首。", "你嘴角微微上扬，\n胜过世间所有风景到场。",
+                "我所贪念的，不偏不倚，恰好是你。\n众生皆苦，你为甜上甜。", "遇见你，是我一生的幸运。\n喜欢你，是我做过最好的事。",
+                "喜欢你的时候，我觉得你很好，世界也很好，就是自己不够好。", "你是年少的欢喜，反过来也是。",
+                "一生很长，要和最爱的人在一起，\n\n比如你。"],
+            balloons: 10,
+            baseVelY: -1,
+            addedVelY: -1,
+            baseVelX: -.25,
+            addedVelX: .5,
+            baseSize: 20,
+            addedSize: 10,
+            baseSizeAdder: 2,
+            addedSizeAdder: 2,
+            baseIncrementer: .01,
+            addedIncrementer: .03,
+            baseHue: -10,
+            addedHue: 30,
+            font: '15px Verdana'
+        },
+
+        cycle = 0,
+        balloons = [];
+
+    ctx.font = opts.font;
+
+    function Balloon() {
+        this.reset();
+    }
+
+    Balloon.prototype.reset = function () {
+
+        this.size = opts.baseSize + opts.addedSize * Math.random();
+        this.sizeAdder = opts.baseSizeAdder + opts.addedSizeAdder * Math.random();
+        this.incrementer = opts.baseIncrementer + opts.addedIncrementer * Math.random();
+
+        this.tick = 0;
+
+        this.x = Math.random() * w;
+        this.y = h + this.size;
+
+        this.vx = opts.baseVelX + opts.addedVelX * Math.random();
+        this.vy = opts.baseVelY + opts.addedVelY * Math.random();
+
+        this.color = 'hsla(hue,70%,60%,.8)'.replace('hue', opts.baseHue + opts.addedHue * Math.random());
+        this.phrase = opts.phrases[++cycle % opts.phrases.length].split('\n');
+        this.lengths = [];
+
+        for (let i = 0; i < this.phrase.length; ++i)
+            this.lengths.push(-ctx.measureText(this.phrase[i]).width / 2);
+    };
+    Balloon.prototype.step = function () {
+
+        this.tick += this.incrementer;
+        this.x += this.vx;
+        this.y += this.vy;
+
+        let size = this.size + this.sizeAdder * Math.sin(this.tick);
+
+        ctx.lineWidth = size / 40;
+        ctx.strokeStyle = '#eee';
+        ctx.beginPath();
+        ctx.moveTo(this.x, this.y - 2);
+        ctx.lineTo(this.x, this.y + size);
+        ctx.stroke();
+        ctx.fillStyle = this.color;
+
+        ctx.translate(this.x, this.y);
+        ctx.rotate(Math.PI / 4);
+        //ctx.fillRect( -size / 2, -size / 2, size / 2, size / 2 );
+        ctx.beginPath();
+        ctx.moveTo(0, 0);
+        ctx.arc(-size / 2, -size / 2 + size / 4, size / 4, Math.PI / 2, Math.PI * 3 / 2);
+        ctx.arc(-size / 2 + size / 4, -size / 2, size / 4, Math.PI, Math.PI * 2);
+        ctx.lineTo(0, 0);
+        ctx.fill();
+        ctx.rotate(-Math.PI / 4);
+        ctx.translate(-this.x, -this.y);
+
+        ctx.translate(this.x, this.y + size + 15);
+        ctx.scale(size / this.size, size / this.size);
+        ctx.fillStyle = '#eee';
+        for (let i = 0; i < this.phrase.length; ++i)
+            ctx.fillText(this.phrase[i], this.lengths[i], i * 15);
+        ctx.scale(this.size / size, this.size / size);
+        ctx.translate(-this.x, -(this.y + size + 15));
+
+        if (this.y < -size * 3)
+            this.reset();
+
+    };
+
+    function anim() {
+
+        window.requestAnimationFrame(anim);
+
+        ctx.fillStyle = 'rgb(190, 14, 46)';
+        ctx.fillRect(0, 0, w, h);
+
+        if (balloons.length < opts.balloons && Math.random() < .01)
+            balloons.push(new Balloon);
+
+        for (let i = 0; i < balloons.length; ++i)
+            balloons[i].step();
+    }
+
+    anim();
+
+</script>
+
+</body>
+
+</html>
