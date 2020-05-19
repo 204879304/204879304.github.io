@@ -5,7 +5,7 @@
 .big {
     width: 61.5rem;
     height: 100rem;
-    margin: 200px auto auto;
+    margin: 30rem auto auto;
     background: transparent;
 }
 
@@ -23,7 +23,6 @@
     height: 16rem;
     background: transparent;
     float: left;
-    margin-top: 20rem;
     text-align: center;
 }
 
