@@ -1,88 +1,75 @@
-.body {
-    background: pink;
+html,
+body {
+    height: 100%;
+    background: #ffe2ea;
+    overflow: hidden;
+    padding: 0;
+    margin: 0;
 }
 
-.big {
-    width: 61.5rem;
-    height: 100rem;
-    margin: 30rem auto auto;
-    background: transparent;
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.small {
-    width: 10rem;
-    height: 16rem;
-    background: transparent;
-    float: left;
-    margin: auto;
-}
-
-.first {
+/*  主要样式 */
+.like {
+    margin-top: -38px;
     position: relative;
-    width: 60rem;
-    height: 16rem;
-    background: transparent;
-    float: left;
-    text-align: center;
 }
 
-.second {
-    width: 60rem;
-    height: 16rem;
-    background: transparent;
-    float: left;
-    margin-top: 1rem;
-}
-
-.third {
-    width: 60rem;
-    height: 16rem;
-    background: transparent;
-    float: left;
-    margin-top: 1rem;
-}
-
-.fourth {
-    width: 60rem;
-    height: 16rem;
-    background: transparent;
-    float: left;
-    margin-top: 1rem;
-}
-
-.all_boder {
-    border: 1rem solid red;
-}
-
-.left_top_boder {
-    border-top: 1rem solid red;
-    border-left: 1rem solid red;
-}
-
-.top_right_boder {
-    border-right: 1rem solid red;
-    border-top: 1rem solid red;
-}
-
-.bottom_boder {
-    border-bottom: 1rem solid red;
-}
-
-.line {
-    border: none;
-    border-top: 1rem solid red;
+.like .heart {
+    position: absolute;
+    top: -10px;
+    left: -11px;
+    z-index: 1;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    pointer-events: none;
     display: none;
 }
 
-.vertical_line {
-    border: none;
-    border-left: 1rem solid red;
+.like .line {
+    fill: none;
+}
+
+.like .second {
+    fill: #c50000;
+    -webkit-transform: scale(0);
+    transform: scale(0);
+    -webkit-transform-origin: 53% 61% 0px;
+    transform-origin: 53% 61% 0px;
+}
+
+.like .main {
+    stroke: #c50000;
+    stroke-width: 5px;
+    fill: #ffe2ea;
+    -webkit-transform-origin: 50% 50%;
+    transform-origin: 50% 50%;
+}
+
+.like svg {
+    transition: all .2s ease-in-out;
+    position: relative;
+    overflow: visible;
+    z-index: 2;
+    cursor: pointer;
+}
+
+.tip_text {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    color: grey;
+}
+
+.continue_text {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
     display: none;
 }
-
-.sign {
-    margin-top: 60rem;
-    color: gray;
-
-}
-
