@@ -1,0 +1,89 @@
+.body {
+    background: pink;
+}
+
+.big {
+    width: 61.5rem;
+    height: 100rem;
+    margin: 200px auto auto;
+    background: transparent;
+}
+
+.small {
+    width: 10rem;
+    height: 16rem;
+    background: transparent;
+    float: left;
+    margin: auto;
+}
+
+.first {
+    position: relative;
+    width: 60rem;
+    height: 16rem;
+    background: transparent;
+    float: left;
+    margin-top: 20rem;
+    text-align: center;
+}
+
+.second {
+    width: 60rem;
+    height: 16rem;
+    background: transparent;
+    float: left;
+    margin-top: 1rem;
+}
+
+.third {
+    width: 60rem;
+    height: 16rem;
+    background: transparent;
+    float: left;
+    margin-top: 1rem;
+}
+
+.fourth {
+    width: 60rem;
+    height: 16rem;
+    background: transparent;
+    float: left;
+    margin-top: 1rem;
+}
+
+.all_boder {
+    border: 1rem solid red;
+}
+
+.left_top_boder {
+    border-top: 1rem solid red;
+    border-left: 1rem solid red;
+}
+
+.top_right_boder {
+    border-right: 1rem solid red;
+    border-top: 1rem solid red;
+}
+
+.bottom_boder {
+    border-bottom: 1rem solid red;
+}
+
+.line {
+    border: none;
+    border-top: 1rem solid red;
+    display: none;
+}
+
+.vertical_line {
+    border: none;
+    border-left: 1rem solid red;
+    display: none;
+}
+
+.sign {
+    margin-top: 60rem;
+    color: gray;
+
+}
+
