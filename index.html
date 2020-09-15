@@ -16,10 +16,14 @@
 <body>
 <script>
     let date = new Date();
-    if (date.getMonth() + 1 === 2 && date.getDate() === 14) {
+    let monthNumber = date.getMonth() + 1;
+    let dateNumber = date.getDate();
+    if (monthNumber === 2 && dateNumber === 14) {
         window.location = "./2020-2-14";
-    }else if(date.getMonth() + 1 === 5 && date.getDate() === 20){
+    } else if (monthNumber === 5 && dateNumber === 20) {
         window.location = "./2020-5-20";
+    } else if (monthNumber === 9 && dateNumber >= 15 && dateNumber <= 25) {
+        window.location = "./2020-9-20";
     }
 </script>
 <noscript><strong>We're sorry but 10000hours doesn't work properly without JavaScript enabled. Please enable it to
