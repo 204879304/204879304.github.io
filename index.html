@@ -24,6 +24,10 @@
         window.location = "./2020-5-20";
     } else if (monthNumber === 9 && dateNumber >= 15 && dateNumber <= 25) {
         window.location = "./2020-9-20";
+    } else if (monthNumber === 12 && dateNumber === 24) {
+        window.location = "./2019-12-24";
+    } else if (date.toLocaleDateString("zh-Hans-u-ca-chinese").toString().indexOf("正月1") !== -1) {
+        window.location = "./2021-2-11";
     }
 </script>
 <noscript><strong>We're sorry but 10000hours doesn't work properly without JavaScript enabled. Please enable it to
